@@ -10,5 +10,5 @@ branding:
   icon: 'akv.svg'
   color: 'blue'
 runs:
-  using: 'node'
+  using: 'node12'
   main: 'main.js'
