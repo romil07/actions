@@ -1,0 +1,15 @@
+name: 'Key Vault Get Secret'
+description: 'Get Secret from Azure Key Vault instance'
+inputs:
+  keyvault-name:
+    description: 'Name of the azure key vault'
+    required: true
+  secretsFilter:
+    description: 'Comma-separated list of secret names to be fetched. Use the default value * to get all the secrets from the vault.' 
+    required: true
+branding:
+  icon: 'akv.svg' # vector art to display in the GitHub Marketplace
+  color: 'blue' # optional, decorates the entry in the GitHub Marketplace
+runs:
+  using: 'node'
+  main: 'main.js'
