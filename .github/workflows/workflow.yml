@@ -1,0 +1,25 @@
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the repo
+    - uses: actions/checkout@master
+    - uses: azure/actions/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
+    - uses: ./KeyVault-GetSecrets
+      with:
+        keyvault-name: "rogoyal-keyVault"
+        secretsFilter: 'password'
+    - uses: azure/docker-login@v1
+      with:
+        login-server: rogoyalcontainer.azurecr.io
+        username: 'rogoyalcontainer'
+        password: ${{ env.password }}
+    - run: |
+        cd go-sample
+        docker build . -t rogoyalcontainer.azurecr.io/myimage:${{ github.sha }}
+        docker push rogoyalcontainer.azurecr.io/myimage:${{ github.sha }}
+        cd ..
