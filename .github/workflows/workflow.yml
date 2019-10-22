@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the repo
+    - uses: actions/checkout@master
+    - uses: azure/actions/login@master
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
+    - uses: ./KeyVault-GetSecrets
+      with:
+        keyVault-name: "rogoyal-keyVault"
+        secretName: 'secret1'
+      id: hello
+    - run: echo "The secret has been set."

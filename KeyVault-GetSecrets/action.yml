@@ -1,0 +1,14 @@
+name: 'Key Vault Get Secret'
+description: 'Get Secret from Azure Key Vault instance'
+inputs:
+  keyvault-name:
+    description: 'Name of the azure key vault'
+    required: true
+  secretsFilter:
+    description: 'Comma separated list of secret names to be fetched'
+branding:
+  icon: 'akv.svg'
+  color: 'blue'
+runs:
+  using: 'node12'
+  main: 'main.js'
