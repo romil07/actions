@@ -92,6 +92,7 @@ export class KeyVaultHelper {
             this.keyVaultClient.getSecretValue(secretName, (error, secretValue) => {
                 if (error) {
                     console.log(util.format("Downloading secret %s failed", secretName));
+                    core.setFailed(util.format("Could not download the secret %s", secretName));
                 }
                 else {
                     this.setVaultVariable(secretName, secretValue);

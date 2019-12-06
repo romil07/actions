@@ -11,8 +11,8 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
     - uses: ./KeyVault-GetSecrets
       with:
-        keyvault-name: "rogoyal-keyVault"
-        secretsFilter: 'password'
+        keyvault: "rogoyal-keyVault"
+        secrets: 'password'
       id: first
     - uses: ./KeyVault-GetSecrets
       with:
