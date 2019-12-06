@@ -23,7 +23,7 @@ jobs:
       with:
         login-server: rogoyalcontainer.azurecr.io
         username: 'rogoyalcontainer'
-        password: first.outputs.password
+        password: ${{ steps.first.outputs.password }}
     - run: |
         cd go-sample
         docker build . -t rogoyalcontainer.azurecr.io/myimage-demo11:${{ github.sha }}
