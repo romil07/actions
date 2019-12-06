@@ -24,6 +24,6 @@ jobs:
         password: ${{ env.password }}
     - run: |
         cd go-sample
-        docker build . -t rogoyalcontainer.azurecr.io/myimage-demo1:${{ github.sha }}
-        docker push rogoyalcontainer.azurecr.io/myimage-demo1:${{ github.sha }}
+        docker build . -t rogoyalcontainer.azurecr.io/myimage-demo11:${{ github.sha }}
+        docker push rogoyalcontainer.azurecr.io/myimage-demo11:${{ github.sha }}
         cd ..        
