@@ -13,15 +13,17 @@ jobs:
       with:
         keyvault-name: "rogoyal-keyVault"
         secretsFilter: 'password'
+      id: first
     - uses: ./KeyVault-GetSecrets
       with:
         keyvault-name: "rogoyal-keyVault2"
         secretsFilter: 'password'
+      id: second
     - uses: azure/docker-login@v1
       with:
         login-server: rogoyalcontainer.azurecr.io
         username: 'rogoyalcontainer'
-        password: ${{ env.password }}
+        password: first.outputs.password
     - run: |
         cd go-sample
         docker build . -t rogoyalcontainer.azurecr.io/myimage-demo11:${{ github.sha }}
