@@ -21,7 +21,6 @@ class KeyVaultHelper {
     downloadSecrets() {
         var downloadAllSecrets = false;
         if (this.keyVaultActionParameters.secretsFilter && this.keyVaultActionParameters.secretsFilter.length === 1 && this.keyVaultActionParameters.secretsFilter[0] === "*") {
-            //core.setFailed("Wildcards are not supported as secrets filter.");
             downloadAllSecrets = true;
         }
         core.debug("Downloading selected secrets");
@@ -78,7 +77,6 @@ class KeyVaultHelper {
         return new Promise((resolve, reject) => {
             this.keyVaultClient.getSecretValue(secretName, (error, secretValue) => {
                 if (error) {
-                    console.log(util.format("Downloading secret %s failed", secretName));
                     core.setFailed(util.format("Could not download the secret %s", secretName));
                 }
                 else {

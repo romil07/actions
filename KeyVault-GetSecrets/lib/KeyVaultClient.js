@@ -23,6 +23,7 @@ class KeyVaultClient extends AzureRestClient_1.ServiceClient {
         super(endpoint, timeOut);
         this.apiVersion = "7.0";
         this.tokenArgs = ["--resource", "https://vault.azure.net"];
+        console.log("fhsdkfkjsd");
         this.keyVaultUrl = keyVaultUrl;
     }
     invokeRequest(request) {
@@ -44,7 +45,7 @@ class KeyVaultClient extends AzureRestClient_1.ServiceClient {
         // Create HTTP transport objects
         var url = nextLink;
         if (!url) {
-            url = this.getRequestUriForbaseUrl(this.keyVaultUrl, '/secrets', {}, ['maxresults=25'], this.apiVersion);
+            url = this.getRequestUriForbaseUrl(this.keyVaultUrl, '/secrets', {}, ['maxresults=2'], this.apiVersion);
         }
         var httpRequest = {
             method: 'GET',

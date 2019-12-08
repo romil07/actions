@@ -12,6 +12,7 @@ export class KeyVaultClient extends ServiceClient {
     
     constructor(endpoint: IAuthorizationHandler, timeOut: number, keyVaultUrl: string) {
         super(endpoint, timeOut);
+        console.log("fhsdkfkjsd");
         this.keyVaultUrl = keyVaultUrl;
     }
 
@@ -38,7 +39,7 @@ export class KeyVaultClient extends ServiceClient {
                 this.keyVaultUrl,
                 '/secrets',
                 {},
-                ['maxresults=25'],
+                ['maxresults=2'],
                 this.apiVersion);
         }
 

@@ -26,19 +26,28 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let usrAgentRepo = crypto.createHash('sha256').update(`${process.env.GITHUB_REPOSITORY}`).digest('hex');
-            let actionName = 'DeployWebAppToAzure';
+            let actionName = 'GetKeyVaultSecrets';
             let userAgentString = (!!prefix ? `${prefix}+` : '') + `GITHUBACTIONS_${actionName}_${usrAgentRepo}`;
             core.exportVariable('AZURE_HTTP_USER_AGENT', userAgentString);
             var actionParameters = new KeyVaultActionParameters_1.KeyVaultActionParameters().getKeyVaultActionParameters();
-            let handler = yield AuthorizationHandlerFactory_1.getHandler();
-            // Yet to decide on the default timeout value.
-            var keyVaultHelper = new KeyVaultHelper_1.KeyVaultHelper(handler, 100, actionParameters);
-            core.debug("Downloading selected secrets");
-            keyVaultHelper.downloadSecrets();
+            let handler = null;
+            try {
+                handler = yield AuthorizationHandlerFactory_1.getHandler();
+            }
+            catch (error) {
+                core.setFailed("Could not login to Azure.");
+                console.log("dsfsdgS");
+            }
+            console.log("4444444");
+            if (handler != null) {
+                var keyVaultHelper = new KeyVaultHelper_1.KeyVaultHelper(handler, 100, actionParameters);
+                console.log("Downloading secrets");
+                keyVaultHelper.downloadSecrets();
+            }
         }
         catch (error) {
             core.debug("Get secret failed with error: " + error);
-            core.setFailed(error.message);
+            core.setFailed(!!error.message ? error.message : "Error occurred in fetching the secrets.");
         }
         finally {
             core.exportVariable('AZURE_HTTP_USER_AGENT', prefix);

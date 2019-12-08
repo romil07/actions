@@ -9,23 +9,23 @@ jobs:
     - uses: azure/actions/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
-    - uses: ./KeyVault-GetSecrets
+    - uses: azure/get-keyvault-secrets@v1.0
       with:
         keyvault: "rogoyal-keyVault"
-        secrets: 'password'
+        secrets: "password"
       id: first
-    - uses: ./KeyVault-GetSecrets
-      with:
-        keyvault-name: "rogoyal-keyVault2"
-        secretsFilter: 'password'
-      id: second
+    - name: Print a greeting
+      env:
+        MY_VAR: ${{ env.secret2 }}
+      run: |
+        echo $MY_VAR
     - uses: azure/docker-login@v1
       with:
         login-server: rogoyalcontainer.azurecr.io
         username: 'rogoyalcontainer'
-        password: ${{ steps.first.outputs.password }}
+        password: ${{ env.pass-word }}
     - run: |
         cd go-sample
-        docker build . -t rogoyalcontainer.azurecr.io/myimage-demo11:${{ github.sha }}
-        docker push rogoyalcontainer.azurecr.io/myimage-demo11:${{ github.sha }}
-        cd ..        
+        docker build . -t rogoyalcontainer.azurecr.io/myimage-demo12:${{ github.sha }}
+        docker push rogoyalcontainer.azurecr.io/myimage-demo12:${{ github.sha }}
+        cd ..
