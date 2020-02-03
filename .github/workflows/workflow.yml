@@ -9,10 +9,10 @@ jobs:
     - uses: azure/actions/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
-    - uses: azure/get-keyvault-secrets@v1.0
+    - uses: azure/get-keyvault-secrets@v1
       with:
         keyvault: "rogoyal-keyVault"
-        secrets: "password"
+        secrets: "testSecret"
       id: first
     - name: Print a greeting
       env:
