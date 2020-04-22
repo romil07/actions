@@ -9,7 +9,7 @@ inputs:
     required: true
 branding:
   icon: 'akv.svg' # vector art to display in the GitHub Marketplace
-  color: 'blue' # optional, decorates the entry in the GitHub Marketplace
+  color: 'blue' # optional, decorates the entry in the GitHub Marketplaced
 runs:
   using: 'node'
   main: 'main.js'
